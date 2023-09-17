@@ -8,6 +8,7 @@
 from taipy.gui import Markdown
 from taipy.gui import navigate
 data = {}
+error_message = ''
 phone_number = ''
 first_name = ''
 last_name = ''
@@ -37,6 +38,10 @@ def submit_form(state):
         exec(f'data[\'drug_name_{i}\'] = state.drug_name_{i}')
         exec(f'data[\'method_of_administration_{i}\'] = state.method_of_administration_{i}')
 
+    if True:
+        state.error_message = "There was an error processing your information"
+        return
+
     with open('database.csv', 'a') as f_object:
         writer_object = writer(f_object)
         writer_object.writerow(data.values())
@@ -60,8 +65,8 @@ def to_next_page(state):
     data['em_last_name'] = state.em_last_name
     data['em_phone_number'] = state.em_phone_number
     data['Medication'] = state.Medication
-    print('here!')
-    print(state.Medication)
+    # print('here!')
+    # print(state.Medication)
     x = 1 if state.Medication == "" else int(state.Medication)
 
     Pages1.pages = {
@@ -106,10 +111,14 @@ Frequency: <|{"{" + f"frequency_{i}" + "}"}|input|>
         
         
         """
+    global error_message
     Next_page += """
-    
+<br/>
 
-<|Submit|button|on_action=submit_form|>
+##<|{error_message}|>
+<br/>
+<|Submit|button|on_action=submit_form|>  
+
 
     """
     Next_page = str(Next_page)
