@@ -38,6 +38,7 @@ class Database {
         let property_dict = this.property_dicts.get(property)
         return property_dict;
     }
+    //TODO: multiple active ingredients ex. ACETAMINOPHEN; PENTAZOCINE HYDROCHLORIDE, multiple methods ex TABLET, EXTENDED RELEASE;ORAL
     get_drug_info_by_property(property, propertyData) {
         // example: get_drug_info_by_property("ActiveIngredient", "ACETAMINOPHEN")
         // example: get_drug_info_by_property("DrugName", "TYLENOL")
@@ -68,13 +69,13 @@ class Database {
             const propertiesFound = new Array();
             propertiesFound.push(drugInfo["Form"] === form);
             propertiesFound.push(drugInfo["Strength"] === strength);
-            if (propertiesFound.toSpliced(0, 1).filter(x => x == false).length == 0) {
+            if (propertiesFound.toSpliced(0, 1).filter(x => x === false).length === 0) {
                 possibleForms.add(drugInfo["Form"]);
             }
-            if (propertiesFound.toSpliced(1, 1).filter(x => x == false).length == 0) {
+            if (propertiesFound.toSpliced(1, 1).filter(x => x === false).length === 0) {
                 possibleStrengths.add(drugInfo["Strength"]);
             }
-            if (propertiesFound.filter(x => x == false).length == 0) {
+            if (propertiesFound.filter(x => x == false).length === 0) {
                 formFound = true;
                 strengthFound = true;
                 otherDrugInfos.push(drugInfo);
