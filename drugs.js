@@ -3,6 +3,35 @@ class Database {
         this.original_database = new Object();
         this.property_dicts = new Map();
         this.index_properties = new Array();
+        this.application_number_to_ndc = new Object();
+        this.ndc_to_image_filepath = new Object();
+    }
+    update_eight_ndc_to_image_filepath(json) {
+        this.ndc_to_image_filepath = json;
+    }
+    eight_ndc_to_image_filepath(ndc) {
+        if (ndc.indexOf("-") === 4) {
+            ndc = "0" + ndc;
+        } else if (ndc.indexOf("-") === 5) {
+            ndc = ndc.splice(6, 0, "0");
+        }
+        for (let [id, ndc11] of Object.values(this.ndc_to_image_filepath["ndc11"])) {
+            if (ndc11.splice(9, 3).indexOf(ndc) !== -1) {
+                console.log(ndc11)
+            }
+        }
+    }
+    update_application_number_to_ndc(json) {
+        this.application_number_to_ndc = json;
+    }
+    application_number_to_ndc(number) {
+        ans = new Set();
+        for (conversionInfo in this.application_number_to_ndc) {
+            if (conversionInfo["APPLICATIONNUMBER"] === "NDA" + number) {
+                ans.add(conversionInfo["PRODUCTNDC"]);
+            }
+        }
+        return ans;
     }
     update_database(json) {
         // clear previous data
@@ -121,4 +150,10 @@ window.addEventListener('load', function() {
     fetch('./drugs.json')
         .then((response) => response.json())
         .then((json) => {database = new Database(); database.update_database(json);});
+    fetch('./product.json')
+        .then((response) => response.json())
+        .then((json) => {database = new Database(); database.update_application_number_to_ndc(json);});
+    fetch('./table.json')
+        .then((response) => response.json())
+        .then((json) => {database = new Database(); database.update_ndc_to_image_filepath(json);});
 })
