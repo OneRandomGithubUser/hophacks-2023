@@ -1,0 +1,14 @@
+center {
+   margin: auto;
+   width: 50%;
+}
+
+bigButton {
+   display: block;
+   width: 100%;
+   border: none;
+   padding: 14px 28px;
+   font-size: 80px;
+   cursor: pointer;
+   text-align: center;
+}

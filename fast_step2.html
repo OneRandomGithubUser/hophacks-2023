@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<script>
+   
+   function setAction() {
+      if (isCorrectMeds()) {
+         window.location.href = "happy_dance.html";
+      } else {
+         // TODO: Help to correct mistake
+      }
+   }
+
+   function isCorrectMeds() {
+      // TODO: Image processing
+      return true
+   }
+</script>
+<body>
+   <h2 id="text">The time is ___, Sue needs 1x Tylonal and 1x Zyertec. They should look like this:</h2>
+   <img src="" alt="Tylonal image">
+   <img src="" alt="Zyertec image">
+   <h2>When you are ready, take a photo and upload here:</h2>
+
+   <input type="file" id="img" name="img" accept="image/*">
+   <button type="submit" onclick="setAction()">Submit</button>
+</body>
+</html>

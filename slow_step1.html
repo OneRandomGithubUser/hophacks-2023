@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   <script>
+      var numOfPills = 3
+      var counter = 1
+
+      function getNextText() {
+         if (counter < numOfPills) {
+            document.getElementById("text").innerHTML = "Place pill " + (counter+1) + " in the tray"
+            counter ++
+         } else {
+            moveOn()
+         }
+      }
+
+      function moveOn() {
+         window.location.href = "happy_dance.html";
+      }
+   </script>
+   <h2 id="text">Place pill 1 in the tray</h2>
+   <button onclick=getNextText()>Next</button>
+</body>
+</html>
