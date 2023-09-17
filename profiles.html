@@ -4,19 +4,38 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <script src="drugs.js"></script>
-   <title>Document</title>
+   <title>Hedgy Med Caddy</title>
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <style>
+   html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
+   </style>
 </head>
 <body>
-   <h2>Who's here?</h2>
+   <!-- Nav bar -->
+   <div class="w3-top">
+      <div class="w3-bar w3-theme-d2 w3-left-align w3-large"> 
+       <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+       </a>
+      </div>
+   </div>
+   <h2 class="w3-center" id="time" style="padding-top: 20px;">Time</h2>
+   <br/>
+   <!-- Texts -->
+   <div class="w3-center">
+   <h2 class="w3-center">Who's here?</h2>
    <a href="slow_step1.html"><button style="margin: auto; width: 40%; height: 30%;">
       <div style="width: 30%; float: left">
          <img src="images/grandma.jpg" alt="grandma profile" style="border-radius: 50%; width: 50%; height: 50%"></img>
       </div> 
       <div style="margin: auto; float: center; text-align: center">
-         <p style="font-size: 25px">Sue</p>       
+         <p style="font-size: 25px">Sue</p>  
       </div>   
    </button></a>
-   
+   <br /><br />
    <a href="fast_step1.html"><button style="margin: auto; width: 40%; height: 30%;">
       <div style="width: 30%; float: left">
          <img src="images/granddaughter.jpg" alt="granddaughter profile" style="border-radius: 50%; width: 50%; height: 50%"></img>
@@ -25,7 +44,7 @@
          <p style="font-size: 25px">Lily</p>       
       </div>   
    </button></a>
-   
+   <br /><br />
    <a href="fast_step1.html"><button style="margin: auto; width: 40%; height: 30%;">
       <div style="width: 30%; float: left">
          <img src="images/Dad.jpg" alt="dad profile" style="border-radius: 50%; width: 50%; height: 50%"></img>
@@ -34,5 +53,11 @@
          <p style="font-size: 25px">Bill</p>       
       </div>   
    </button></a>
+   </div>
 </body>
+
+<script>
+   const d = new Date().toLocaleDateString('en-gb', {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true});
+   document.getElementById("time").innerHTML = d
+</script>
 </html>
