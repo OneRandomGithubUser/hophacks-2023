@@ -17,7 +17,7 @@ def send_text(phone_number,name, pills):
                          to='+' + phone_number
                      )
 
-    print(message.sid)
+    # print(message.sid)
 
 
 if __name__ == "__main__":
@@ -39,7 +39,7 @@ if __name__ == "__main__":
             elif len(pills) >= 3:
                 pills[-1] = 'and ' + pills[-1]
                 pillname = ", ".join(pills)
-            print(pillname)
+            # print(pillname)
             number = row[2]
             name = row[0]
             send_text(number, name, pillname)
