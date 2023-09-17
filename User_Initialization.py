@@ -20,7 +20,8 @@ Medication = ''
 for i in range(100):
     exec(f'drug_name_{i} = ""')
     exec(f'dosage_{i} = ""')
-    exec(f'timing_{i} = ""')
+    exec(f'frequency_{i} = ""')
+    exec(f'method_of_administration_{i} = ""')
 
 from taipy import Gui
 from csv import writer
@@ -32,8 +33,10 @@ def submit_form(state):
     x = 1 if data['Medication'] == "" else int(data['Medication'])
     for i in range(x):
         exec(f'data[\'Dose_{i}\'] = state.dosage_{i}')
-        exec(f'data[\'Timing_{i}\'] = state.timing_{i}')
+        exec(f'data[\'Frequency_{i}\'] = state.frequency_{i}')
         exec(f'data[\'drug_name_{i}\'] = state.drug_name_{i}')
+        exec(f'data[\'method_of_administration_{i}\'] = state.method_of_administration_{i}')
+
     with open('database.csv', 'a') as f_object:
         writer_object = writer(f_object)
         writer_object.writerow(data.values())
@@ -71,21 +74,32 @@ def to_next_page(state):
     for i in range(x):
         exec(f'global dosage_{i}')
         exec(f'dosage_{i} =  ""')
-        exec(f'global timing_{i}')
-        exec(f'timing_{i} = ""')
+        exec(f'global frequency_{i}')
+        exec(f'frequency_{i} = ""')
         exec(f'global drug_name_{i}')
         exec(f'global drug_name_{i}')
+        exec(f'global method_of_administration_{i}')
+        exec(f'method_of_administration_{i} = ""')
+
 
         Next_page += f"""
-Prescription {i+1}
+        
+<br/>
+#Prescription {i+1}
+
+
+
         
 Drug Name: <|{"{" + f"drug_name_{i}" + "}"}|input|>
+
+
+Method of administration: <|{"{" + f"method_of_administration_{i}" + "}"}|input|>
 
 
 Dosage: <|{"{" + f"dosage_{i}" + "}"}|input|>
         
         
-Timing: <|{"{" + f"timing_{i}" + "}"}|input|>
+Frequency: <|{"{" + f"frequency_{i}" + "}"}|input|>
 
 
 
