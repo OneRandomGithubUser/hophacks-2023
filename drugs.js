@@ -65,14 +65,16 @@ class Database {
         let possibleStrengths = new Set();
         let otherDrugInfos = new Array();
         for (const drugInfo of possibleDrugInfos) {
-            const propertiesFound = [drugInfo["Form"] === form, drugInfo["Strength"] === strength];
+            const propertiesFound = new Array();
+            propertiesFound.push(drugInfo["Form"] === form);
+            propertiesFound.push(drugInfo["Strength"] === strength);
             if (propertiesFound.toSpliced(0, 1).filter(x => x == false).length == 0) {
                 possibleForms.add(drugInfo["Form"]);
             }
             if (propertiesFound.toSpliced(1, 1).filter(x => x == false).length == 0) {
                 possibleStrengths.add(drugInfo["Strength"]);
             }
-            if (drugInfo["Form"] === form && drugInfo["Strength"] === strength) {
+            if (propertiesFound.filter(x => x == false).length == 0) {
                 formFound = true;
                 strengthFound = true;
                 otherDrugInfos.push(drugInfo);
