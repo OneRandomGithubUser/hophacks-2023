@@ -4,27 +4,75 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <script src="drugs.js"></script>
-   <title>Document</title>
+   <title>Hedgy Med Caddy</title>
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <style>
+   html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
+   </style>
 </head>
 <body>
-   <script>
-      var numOfPills = 3
-      var counter = 1
+   <!-- Nav bar -->
+   <div class="w3-top">
+      <div class="w3-bar w3-theme-d2 w3-left-align w3-large"> 
+         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+         </a>
+      </div>
+   </div>
+   <h2 class="w3-center" id="time" style="padding-top: 20px;">Time</h2>
+   <br/>
+   <!-- Texts -->
+   <h2 id="text1" class="w3-center">text1</h2>
+   <h2 id="text2" class="w3-center">text2</h2>
+   <img id="img" src="images/tylenol.jpg" alt="medicine image" style="width:20%;height:20%;display: block; margin-left: auto;margin-right: auto;">
+   <div class="w3-center"><i>Please place them in the tray.</i></div>
 
-      function getNextText() {
-         if (counter < numOfPills) {
-            document.getElementById("text").innerHTML = "Place pill " + (counter+1) + " in the tray"
-            counter ++
-         } else {
-            moveOn()
-         }
-      }
-
-      function moveOn() {
-         window.location.href = "happy_dance.html";
-      }
-   </script>
-   <h2 id="text">Place pill 1 in the tray</h2>
-   <button onclick=getNextText()>Next</button>
+   <!-- Buttons -->
+   <div class="w3-center" style="padding-top: 10px;">
+      <button onclick=openHelp() class="w3-button w3-theme-d2" style="font-size: 25px;">Need help?</button>
+      <button onclick=getNextText() class="w3-button w3-theme-d2" style="font-size: 25px;">Next</button>
+      <audio id="audio" src="audio/next_button_sf.mp3"></audio>
+   </div>
 </body>
+
+<script>
+   const numOfPills = 3
+   var counter = 0
+   const medsList = ["Tylenol", "Zyertec", "Warfarin"]
+   const colors = ["white", "transparent", "orange"]
+   const images = ["images/tylenol.jpg", "images/zyrtec.jpg", "images/warfarin.jpg"]
+
+   // set time
+   const d = new Date().toLocaleDateString('en-gb', {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true});
+   document.getElementById("time").innerHTML = d
+
+   getNextText()
+
+   function getNextText() {
+      if (counter < numOfPills) {
+         // change text
+         document.getElementById("text1").innerHTML = "Let's start with your: " + medsList[counter]
+         document.getElementById("text2").innerHTML = "It is the " + colors[counter] + " pill."
+         document.getElementById("img").src = images[counter]
+         counter ++
+
+         // play sound
+         var audio = document.getElementById("audio");
+         audio.play();
+      } else {
+         moveOn()
+      }
+   }
+
+   function moveOn() {
+      window.location.href = "happy_dance.html"
+   }
+
+   function openHelp() {
+      window.location.href = 'need_help.html'
+   }
+</script>
 </html>

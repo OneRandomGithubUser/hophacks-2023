@@ -5,7 +5,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Hedgy Med Caddy</title>
    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-   <script src="drugs.js"></script>
+   <script src="speak.js-master/speakClient.js"></script>
    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
@@ -14,40 +14,29 @@
    html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
    </style>
 </head>
-
 <body>
    <!-- Nav bar -->
    <div class="w3-top">
       <div class="w3-bar w3-theme-d2 w3-left-align w3-large"> 
-       <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
-       </a>
+         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+         </a>
       </div>
    </div>
    <h2 class="w3-center" id="time" style="padding-top: 20px;">Time</h2>
    <br/>
-   <!-- Text -->
-   <h2 class="w3-center" style="font-weight: bold;">Good morning, how are you today?</h2>
-   <h3 class="w3-center">Sue's next does is due in 20 minutes</h3>
-   <img src="images/mascot.png" alt="Hedgehog image" style="width:20%;height:20%;display: block; margin-left: auto;margin-right: auto;">
-   <br />
-   <a class="w3-center"><h2><button class="w3-button w3-theme-d2">Let's get started!</button></h2></a>
+   <div class="w3-center">
+      <h1>We just pinged your family</h1>
+      <h2>Do you want us to ping your pharmacist?</h2>
+      <button class="w3-button w3-theme-d2" style="font-size: 25px;">No, thanks</button>
+      <button class="w3-button w3-theme-d2" style="font-size: 25px;">Yes</button>
+   </div>
 
-   <!-- <audio id="audio" src="audio/next_button_sf.mp3"></audio> -->
+   <!-- TODO: Connect to twilio -->
 </body>
 
 <script>
-   // function playSound() {
-   //    // play audio
-   //    var audio = document.getElementById("audio");
-   //    audio.play();
-   //    setTimeout(window.location.href = "profiles.html", 1000);
-      
-   // }
-
+   // set time
    const d = new Date().toLocaleDateString('en-gb', {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true});
    document.getElementById("time").innerHTML = d
-
-   
 </script>
-
 </html>

@@ -4,11 +4,37 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <script src="drugs.js"></script>
-   <title>Document</title>
+   <title>Hedgy Med Caddy</title>
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <style>
+   html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
+   </style>
 </head>
 <body>
-   <h2>Are you helping Sue with their medication?</h2>
-   <a href="fast_step2.html"><button>Yes</button></a>
-   <a href=""><button>No</button></a>
+   <!-- Nav bar -->
+   <div class="w3-top">
+      <div class="w3-bar w3-theme-d2 w3-left-align w3-large"> 
+         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+         </a>
+      </div>
+   </div>
+   <h2 class="w3-center" id="time" style="padding-top: 20px;">Time</h2>
+   <br/>
+   <!-- Texts -->
+   <div class="w3-center">
+      <h2>Are you helping Sue with their medication?</h2>
+      <a href="profiles.html"><button class="w3-button w3-theme-d2" style="font-size: 20px;">No</button></a>
+      <a href="fast_step2.html"><button class="w3-button w3-theme-d2" style="font-size: 20px;">Yes</button></a>
+   </div>
 </body>
+
+<script>
+   // set time
+   const d = new Date().toLocaleDateString('en-gb', {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true});
+   document.getElementById("time").innerHTML = d
+</script>
 </html>
