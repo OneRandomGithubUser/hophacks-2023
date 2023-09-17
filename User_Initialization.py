@@ -38,7 +38,7 @@ def submit_form(state):
         exec(f'data[\'drug_name_{i}\'] = state.drug_name_{i}')
         exec(f'data[\'method_of_administration_{i}\'] = state.method_of_administration_{i}')
 
-    if True:
+    if False:
         state.error_message = "There was an error processing your information"
         return
 
