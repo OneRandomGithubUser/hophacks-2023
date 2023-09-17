@@ -1,4 +1,10 @@
-
+#Language
+#Patient Name / Emergency Contact
+#Phone Number
+#Medications name
+#Dose
+#Timing
+#Weight/age
 from taipy.gui import Markdown
 from taipy.gui import navigate
 data = {}
@@ -12,6 +18,7 @@ em_last_name = ''
 em_phone_number = ''
 Medication = ''
 for i in range(100):
+    exec(f'drug_name_{i} = ""')
     exec(f'dosage_{i} = ""')
     exec(f'timing_{i} = ""')
 
@@ -26,6 +33,7 @@ def submit_form(state):
     for i in range(x):
         exec(f'data[\'Dose_{i}\'] = state.dosage_{i}')
         exec(f'data[\'Timing_{i}\'] = state.timing_{i}')
+        exec(f'data[\'drug_name_{i}\'] = state.drug_name_{i}')
     with open('database.csv', 'a') as f_object:
         writer_object = writer(f_object)
         writer_object.writerow(data.values())
@@ -63,15 +71,24 @@ def to_next_page(state):
     for i in range(x):
         exec(f'global dosage_{i}')
         exec(f'dosage_{i} =  ""')
+        exec(f'global timing_{i}')
         exec(f'timing_{i} = ""')
+        exec(f'global drug_name_{i}')
+        exec(f'global drug_name_{i}')
+
         Next_page += f"""
 Prescription {i+1}
         
-        
+Drug Name: <|{"{" + f"drug_name_{i}" + "}"}|input|>
+
+
 Dosage: <|{"{" + f"dosage_{i}" + "}"}|input|>
         
         
 Timing: <|{"{" + f"timing_{i}" + "}"}|input|>
+
+
+
         
         
         """
@@ -99,6 +116,8 @@ page1 = """
     </select>
 
 First Name: <|{first_name}|input|>
+
+
 
 
 Last Name: <|{last_name}|input|>
