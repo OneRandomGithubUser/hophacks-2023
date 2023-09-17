@@ -49,6 +49,6 @@ req.open('GET', './output-onlinetsvtools.json');
 req.send();
 */
 
-fetch('./output-onlinetsvtools.json')
+fetch('./drugs.json')
     .then((response) => response.json())
     .then((json) => update_database(json));
