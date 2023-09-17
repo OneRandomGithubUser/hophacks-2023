@@ -28,7 +28,7 @@ if __name__ == "__main__":
             j = 0
             for i in row[9:]:
                 j += 1
-                if j%3==0:
+                if j%4==3:
                     pills.append(i)
             if len(pills) == 0:
                 continue
