@@ -42,5 +42,5 @@ if __name__ == "__main__":
             print(pillname)
             number = row[2]
             name = row[0]
-            print(pillname)
-            # send_text(number, name, pillname)
+            # print(pillname)
+            send_text(number, name, pillname)
