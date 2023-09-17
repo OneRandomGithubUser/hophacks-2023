@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <script src="drugs.js"></script>
+   <script>
+      function clickit() {
+         let data = database.verify_data(document.getElementById(':r1:').value,document.getElementById(':r3:').value,document.getElementById(':r5:').value);
+         let setText = "";
+         if (data[0][0] === true) {setText = ""} else {setText = 'Medication was not found. Please check the spelling of your medication.'}
+         document.getElementById('error1').textContent = setText;
+         if (data[1][0] === true) {setText = ""} else {
+            setText = 'Method of administration was invalid.'
+            if (data[1][1].size > 0) {
+               setText += '<br>Did you mean: '
+               for (let [index, suggestion] of Object.entries(Array.from(data[1][1]))) {
+                  setText += suggestion;
+                  if (index === data[1][1].size - 1) {
+                     setText += ", or";
+                  } else if (index !== data[1][1].size - 1) {
+                     setText += ",";
+                  }
+               }
+               setText += "?"
+            } else {
+               setText += " Please check that you have entered in the right information.";
+            }
+         }
+         document.getElementById('error2').innerHTML = setText;
+         if (data[2][0] === true) {setText = ""} else {
+            setText = 'Dosage was invalid.'
+            if (data[2][1].size > 0) {
+               setText += '<br>Did you mean: '
+               for (let [index, suggestion] of Object.entries(Array.from(data[2][1]))) {
+                  setText += suggestion;
+                  if (index === data[2][1].size - 1) {
+                     setText += ", or";
+                  } else if (index !== data[2][1].size - 1) {
+                     setText += ",";
+                  }
+               }
+               setText += "?"
+            } else {
+               setText += " Please check that you have entered in the right information.";
+            }
+         }
+         document.getElementById('error3').innerHTML = setText;
+      }
+   </script>
+</head>
+<body class="taipy-dark">
+   <div id="root">
+   <div class="MuiBox-root css-0" style="display: flex;"><main class="MuiBox-root css-7g81c7"><div class="jsx-parser"><div class="jsx-parser"><div class="md-para"><br></div>
+      <h1>Prescription 1</h1>
+      <div class="md-para">Drug Name: <div class="MuiFormControl-root MuiFormControl-marginDense MuiTextField-root taipy-input css-whrf72" aria-label=""><div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-hiddenLabel css-zec9op"><input aria-invalid="false" id=":r1:" type="text" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputHiddenLabel css-aeb85c" value="ACETAMINOPHEN"><fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-nqlg3w"><legend class="css-ihdtdm"><span class="notranslate">&ZeroWidthSpace;</span></legend></fieldset></div></div></div>
+      <div id="error1"></div>
+      <div class="md-para">Method of administration: <div class="MuiFormControl-root MuiFormControl-marginDense MuiTextField-root taipy-input css-whrf72" aria-label=""><div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-hiddenLabel css-zec9op"><input aria-invalid="false" id=":r3:" type="text" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputHiddenLabel css-aeb85c" value="TABLET, EXTENDED RELEASE;ORAL"><fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-nqlg3w"><legend class="css-ihdtdm"><span class="notranslate">&ZeroWidthSpace;</span></legend></fieldset></div></div></div>
+      <div id="error2"></div>
+      <div class="md-para">Dosage: <div class="MuiFormControl-root MuiFormControl-marginDense MuiTextField-root taipy-input css-whrf72" aria-label=""><div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-hiddenLabel css-zec9op"><input aria-invalid="false" id=":r5:" type="text" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputHiddenLabel css-aeb85c" value="80MG"><fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-nqlg3w"><legend class="css-ihdtdm"><span class="notranslate">&ZeroWidthSpace;</span></legend></fieldset></div></div></div>
+      <div id="error3"></div>
+      <div class="md-para">Frequency: <div class="MuiFormControl-root MuiFormControl-marginDense MuiTextField-root taipy-input css-whrf72" aria-label=""><div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-hiddenLabel css-zec9op"><input aria-invalid="false" id=":r7:" type="text" class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputHiddenLabel css-aeb85c" value="DAILY"><fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-nqlg3w"><legend class="css-ihdtdm"><span class="notranslate">&ZeroWidthSpace;</span></legend></fieldset></div></div></div>
+      <div id="error4"></div>
+      <div class="md-para"><br></div>
+      <h2><span class="MuiTypography-root MuiTypography-body1 taipy-text css-lpnwt2" aria-label=""></span></h2>
+      <div class="md-para"><br>
+      <button onmouseup="clickit()" class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium taipy-button css-1w541yl" tabindex="0" type="button" aria-label="">Submit<span class="MuiTouchRipple-root css-w0pj6f"></span></button>  </div></div></div></main></div>
+   </div>
+   </body>
+</html>

@@ -65,6 +65,9 @@ class Database {
     }
     get_drugs_by_property(property) {
         let property_dict = this.property_dicts.get(property)
+        if (property_dict === undefined) {
+            throw ReferenceError("get_drugs_by_property could not find drug by property");
+        }
         return property_dict;
     }
     //TODO: multiple active ingredients ex. ACETAMINOPHEN; PENTAZOCINE HYDROCHLORIDE, multiple methods ex TABLET, EXTENDED RELEASE;ORAL
@@ -73,18 +76,29 @@ class Database {
         // example: get_drug_info_by_property("DrugName", "TYLENOL")
         let property_dict = this.get_drugs_by_property(property);
         let property_dict_entry = property_dict.get(propertyData);
+        if (property_dict_entry === undefined) {
+            throw ReferenceError("get_drug_info_by_property could not find drug info by property");
+        }
         return property_dict_entry;
     }
+    // example: verify_data("ACETAMINOPHEN", "TABLET, EXTENDED RELEASE;ORAL", "80MG")
     verify_data(drugNameOrActiveIngredient, form=null, strength=null) {
-        let drugOrActiveFound = null;
+        let drugOrActiveFound = false;
         let possibleDrugInfos = new Array();
         try {
             possibleDrugInfos = possibleDrugInfos.concat(this.get_drug_info_by_property("ActiveIngredient", drugNameOrActiveIngredient));
+            drugOrActiveFound = true;
+        } catch (e) {
+            if (e instanceof ReferenceError) {
+            } else {
+                throw e;
+            }
+        };
+        try {
             possibleDrugInfos = possibleDrugInfos.concat(this.get_drug_info_by_property("DrugName", drugNameOrActiveIngredient));
             drugOrActiveFound = true;
         } catch (e) {
             if (e instanceof ReferenceError) {
-                drugOrActiveFound = false;
             } else {
                 throw e;
             }
@@ -150,10 +164,12 @@ window.addEventListener('load', function() {
     fetch('./drugs.json')
         .then((response) => response.json())
         .then((json) => {database = new Database(); database.update_database(json);});
+        /*
     fetch('./product.json')
         .then((response) => response.json())
         .then((json) => {database = new Database(); database.update_application_number_to_ndc(json);});
     fetch('./table.json')
         .then((response) => response.json())
-        .then((json) => {database = new Database(); database.update_ndc_to_image_filepath(json);});
+        .then((json) => {database = new Database(); database.update_eight_ndc_to_image_filepath(json);});
+        */
 })
