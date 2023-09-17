@@ -4,7 +4,6 @@ class Database {
         this.property_dicts = new Map();
         this.index_properties = new Array();
     }
-    search_in_drug_info(drug_infos, property) {}
     update_database(json) {
         // clear previous data
         for (property in this.index_properties) {
@@ -47,18 +46,61 @@ class Database {
         return property_dict_entry;
     }
     verify_data(drugNameOrActiveIngredient, form=null, strength=null) {
+        let drugOrActiveFound = null;
+        let possibleDrugInfos = new Array();
         try {
-            possibleDrugInfos = new Array();
-            possibleDrugInfos.push(get_drug_info_by_property("ActiveIngredient", drugNameOrActiveIngredient));
-            possibleDrugInfos.push(get_drug_info_by_property("DrugName", drugNameOrActiveIngredient));
+            possibleDrugInfos = possibleDrugInfos.concat(this.get_drug_info_by_property("ActiveIngredient", drugNameOrActiveIngredient));
+            possibleDrugInfos = possibleDrugInfos.concat(this.get_drug_info_by_property("DrugName", drugNameOrActiveIngredient));
+            drugOrActiveFound = true;
         } catch (e) {
             if (e instanceof ReferenceError) {
-                return ReferenceError("drug name or active ingredient not found")
+                drugOrActiveFound = false;
             } else {
                 throw e;
             }
         };
-
+        let formFound = false;
+        let strengthFound = false;
+        let possibleForms = new Set();
+        let possibleStrengths = new Set();
+        let otherDrugInfos = new Array();
+        for (const drugInfo of possibleDrugInfos) {
+            const propertiesFound = [drugInfo["Form"] === form, drugInfo["Strength"] === strength];
+            if (propertiesFound.toSpliced(0, 1).filter(x => x == false).length == 0) {
+                possibleForms.add(drugInfo["Form"]);
+            }
+            if (propertiesFound.toSpliced(1, 1).filter(x => x == false).length == 0) {
+                possibleStrengths.add(drugInfo["Strength"]);
+            }
+            if (drugInfo["Form"] === form && drugInfo["Strength"] === strength) {
+                formFound = true;
+                strengthFound = true;
+                otherDrugInfos.push(drugInfo);
+            }
+        }
+        let ans = new Array();
+        if (drugOrActiveFound === false) {
+            ans.push([false, null]);
+        } else if (drugOrActiveFound === true) {
+            ans.push([true, null]);
+        } else {
+            ans.push(null);
+        }
+        if (formFound === false) {
+            ans.push([false, possibleForms]);
+        } else if (formFound === true) {
+            ans.push([true, otherDrugInfos]);
+        } else {
+            ans.push(null);
+        }
+        if (strengthFound === false) {
+            ans.push([false, possibleStrengths]);
+        } else if (strengthFound === true) {
+            ans.push([true, otherDrugInfos]);
+        } else {
+            ans.push(null);
+        }
+        return ans;
     }
 }
 
